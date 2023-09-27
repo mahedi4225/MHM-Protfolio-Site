@@ -1,6 +1,8 @@
 # MHM-Protfolio-Site
 A web based portfolio site using HTML,CSS,JAVASCRIPT &amp; Bootstrap 
 
+This Web site have a "DARK MODE". 
+
 
 ![Screenshot (67)](https://github.com/mahedi4225/MHM-Protfolio-Site/assets/114085625/2da4ef20-2e3f-44a4-adf3-495de92fe125)
 ![Screenshot (66)](https://github.com/mahedi4225/MHM-Protfolio-Site/assets/114085625/0847da5b-ba2a-49ed-9430-2491eaec8071)
