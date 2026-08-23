@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mahmud Hasan Mahedi — Creative Designer & Web Developer</title>
-<meta name="description" content="Portfolio of Mahmud Hasan Mahedi, Creative Designer & Web Developer based in Gazipur, Dhaka.">
+<title>Mahmud Hasan Mahedi — Graphic Designer & Creative Technologist</title>
+<meta name="description" content="Portfolio of Mahmud Hasan Mahedi, Graphic Designer & Creative Technologist based in Gazipur, Dhaka.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,272 +26,237 @@
     --font-body: 'Inter', sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
     --radius: 14px;
+    --page-pad: clamp(14px, 4vw, 24px);
   }
 
   *{ margin:0; padding:0; box-sizing:border-box; }
   html{ scroll-behavior:smooth; }
 
   body{
-    background:
-      radial-gradient(ellipse 900px 500px at 85% -10%, rgba(124,92,255,0.16), transparent 60%),
-      radial-gradient(ellipse 700px 500px at -10% 90%, rgba(201,255,61,0.06), transparent 60%),
-      var(--bg);
+    background: var(--bg);
     color: var(--text);
     font-family: var(--font-body);
     line-height:1.6;
-    min-height:100vh;
+    overflow-x: hidden;
   }
 
   a{ color:inherit; text-decoration:none; }
   ul{ list-style:none; }
-
+  img{ max-width:100%; display:block; }
   ::selection{ background: var(--accent); color:#fff; }
 
-  /* ---------- Scrollbar ---------- */
-  ::-webkit-scrollbar{ width:8px; }
+  ::-webkit-scrollbar{ width:8px; height:8px; }
   ::-webkit-scrollbar-track{ background:transparent; }
   ::-webkit-scrollbar-thumb{ background: var(--border); border-radius:8px; }
 
-  /* ---------- Layout ---------- */
-  .app{
-    display:grid;
-    grid-template-columns: 300px 1fr;
-    max-width: 1240px;
-    margin: 0 auto;
-    min-height:100vh;
-  }
+  .page{ max-width: 1080px; margin: 0 auto; padding: 0 var(--page-pad) clamp(50px, 8vw, 80px); }
 
-  /* ---------- Sidebar ---------- */
-  .sidebar{
-    position:sticky;
-    top:0;
-    align-self:start;
-    height:100vh;
-    padding: 40px 28px;
-    border-right:1px solid var(--border);
-    display:flex;
-    flex-direction:column;
-    gap:28px;
-  }
-
-  .avatar{
+  /* ================= BANNER + IDENTITY ================= */
+  .banner{
+    height: clamp(120px, 22vw, 200px);
+    margin: 0 calc(-1 * var(--page-pad));
+    border-radius: 0 0 20px 20px;
+    background:
+      repeating-linear-gradient(115deg, rgba(255,255,255,0.05) 0 1px, transparent 1px 42px),
+      linear-gradient(120deg, var(--accent) 0%, #4527A0 55%, #1A2233 100%);
     position:relative;
-    width:76px; height:76px;
-    border-radius:20px;
-    background: linear-gradient(145deg, var(--accent), #4527A0);
-    display:flex; align-items:center; justify-content:center;
-    font-family: var(--font-display);
-    font-weight:700;
-    font-size:1.5rem;
-    color:#fff;
-    box-shadow: 0 10px 30px -8px rgba(124,92,255,0.55);
     overflow:hidden;
   }
-  .avatar img{
-    width:100%; height:100%;
-    object-fit:cover;
-    border-radius:20px;
-    display:block;
+  .banner::after{
+    content:"";
+    position:absolute; inset:0;
+    z-index:2;
+    background: radial-gradient(circle at 85% 20%, rgba(201,255,61,0.25), transparent 55%);
   }
-  .avatar-fallback{ display:none; }
+  .banner-img{
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover; z-index:1;
+  }
 
-  .id-name{
+  .identity{
+    position:relative;
+    padding: 0 8px;
+    margin-top: clamp(-40px, -8vw, -30px);
+  }
+
+  .avatar-ring{
+    position:relative;
+    width: clamp(76px, 14vw, 116px);
+    height: clamp(76px, 14vw, 116px);
+    border-radius: clamp(18px, 3vw, 28px);
+    border: clamp(3px, 1vw, 5px) solid var(--bg);
+    background: linear-gradient(145deg, var(--accent), #4527A0);
+    box-shadow: 0 14px 34px -10px rgba(0,0,0,0.6);
+    overflow:hidden;
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+  }
+  .avatar-ring img{ width:100%; height:100%; object-fit:cover; }
+  .avatar-fallback{
+    display:none;
+    font-family: var(--font-display); font-weight:700; font-size: clamp(1.4rem, 3vw, 2.1rem); color:#fff;
+  }
+
+  .identity-body{ margin-top:18px; }
+  .identity-name-row{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+  .identity-name{
     font-family: var(--font-display);
-    font-size:1.35rem;
-    font-weight:700;
-    letter-spacing:-0.01em;
-    margin-top:16px;
+    font-size: clamp(1.6rem, 3vw, 2.1rem);
+    font-weight:700; letter-spacing:-0.01em;
   }
-  .id-role{
-    font-family: var(--font-mono);
-    font-size:0.82rem;
-    color: var(--lime);
-    margin-top:4px;
-  }
-  .id-role::before{ content:"$ "; color: var(--muted); }
-
   .status-pill{
-    display:inline-flex;
-    align-items:center;
-    gap:7px;
-    margin-top:14px;
-    font-size:0.75rem;
-    font-family: var(--font-mono);
-    color: var(--muted);
-    background: var(--surface-2);
-    border:1px solid var(--border);
-    padding:6px 10px;
-    border-radius:999px;
-    width:fit-content;
+    display:inline-flex; align-items:center; gap:7px;
+    font-size:0.72rem; font-family: var(--font-mono); color: var(--muted);
+    background: var(--surface-2); border:1px solid var(--border);
+    padding:5px 10px; border-radius:999px;
   }
   .status-dot{
-    width:7px; height:7px; border-radius:50%;
-    background: var(--lime);
-    box-shadow: 0 0 8px var(--lime);
-    animation: pulse 1.8s infinite;
+    width:7px; height:7px; border-radius:50%; background: var(--lime);
+    box-shadow: 0 0 8px var(--lime); animation: pulse 1.8s infinite;
   }
   @keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:0.35;} }
 
-  .contact-list{ display:flex; flex-direction:column; gap:14px; margin-top:6px; }
-  .contact-item{ display:flex; gap:12px; align-items:flex-start; }
-  .contact-item svg{ flex-shrink:0; margin-top:2px; color: var(--accent); }
-  .contact-label{ font-size:0.68rem; text-transform:uppercase; letter-spacing:0.08em; color: var(--muted); }
-  .contact-value{ font-size:0.85rem; word-break:break-word; }
-  .contact-value a:hover{ color: var(--lime); }
-
-  .sidebar-spacer{ flex:1; }
-
-  .socials{ display:flex; gap:10px; }
-  .socials a{
-    width:38px; height:38px;
-    border:1px solid var(--border);
-    border-radius:10px;
-    display:flex; align-items:center; justify-content:center;
-    color: var(--muted);
-    transition: all .2s ease;
+  .identity-headline{
+    margin-top:8px; font-size:1.02rem; color: var(--text); max-width:640px;
   }
-  .socials a:hover{ color:#fff; border-color: var(--accent); background: var(--accent-soft); transform: translateY(-2px); }
-
-  /* ---------- Nav (mobile) ---------- */
-  .mobile-nav-toggle{
-    display:none;
-    position:fixed; top:18px; right:18px; z-index:50;
-    width:44px; height:44px;
-    background: var(--surface-2);
-    border:1px solid var(--border);
-    border-radius:10px;
-    align-items:center; justify-content:center;
-    color: var(--text);
-  }
-
-  /* ---------- Main ---------- */
-  .main{ padding: 40px 48px 90px; min-width:0; }
-
-  nav.topnav{
-    display:flex; gap:6px; margin-bottom:56px;
-    background: var(--surface);
-    border:1px solid var(--border);
-    padding:6px; border-radius:12px;
-    width:fit-content;
-  }
-  nav.topnav a{
-    font-family: var(--font-mono);
-    font-size:0.8rem;
-    padding:9px 16px;
-    border-radius:8px;
-    color: var(--muted);
-    transition: all .2s ease;
-  }
-  nav.topnav a:hover{ color: var(--text); }
-  nav.topnav a.active{ background: var(--accent); color:#fff; }
-
-  section{ margin-bottom: 96px; scroll-margin-top: 30px; }
-  .eyebrow{
-    font-family: var(--font-mono);
-    font-size:0.78rem;
-    color: var(--accent);
-    letter-spacing:0.05em;
-    margin-bottom:10px;
-    display:flex; align-items:center; gap:8px;
-  }
-  .eyebrow::before{ content:""; width:22px; height:1px; background: var(--accent); }
-
-  h2.section-title{
-    font-family: var(--font-display);
-    font-size:2rem;
-    font-weight:700;
-    letter-spacing:-0.02em;
-    margin-bottom: 28px;
-  }
-
-  /* ---------- Hero ---------- */
-  .hero h1{
-    font-family: var(--font-display);
-    font-size: clamp(2.4rem, 5vw, 3.6rem);
-    font-weight:700;
-    line-height:1.08;
-    letter-spacing:-0.02em;
-    max-width: 720px;
-  }
-  .hero h1 .grad{
+  .identity-headline .grad{
     background: linear-gradient(100deg, var(--accent), var(--lime) 90%);
     -webkit-background-clip:text; background-clip:text; color:transparent;
+    font-weight:600;
   }
-  .hero p.lede{
-    margin-top:22px;
-    font-size:1.05rem;
-    color: var(--muted);
-    max-width:560px;
+  .identity-meta{
+    margin-top:10px; display:flex; align-items:center; gap:8px;
+    font-size:0.86rem; color: var(--muted); flex-wrap:wrap;
+    overflow-wrap:anywhere;
   }
-  .hero-tags{ display:flex; flex-wrap:wrap; gap:10px; margin-top:28px; }
-  .hero-tags span{
-    font-family: var(--font-mono);
-    font-size:0.78rem;
+  .identity-meta svg{ color: var(--accent); flex-shrink:0; }
+  .identity-meta a:hover{ color: var(--lime); }
+  .dot-sep{ width:3px; height:3px; border-radius:50%; background: var(--muted); }
+
+  .identity-actions{ display:flex; gap:12px; margin-top:20px; flex-wrap:wrap; }
+
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    background: var(--accent); color:#fff;
+    padding:11px 20px; border-radius:10px;
+    font-weight:600; font-size:0.88rem;
+    border:none; cursor:pointer;
+    transition: all .2s ease;
+    white-space:nowrap;
+  }
+  .btn:hover{ background:#6a4cf0; transform: translateY(-2px); }
+  .btn.ghost{ background:transparent; border:1px solid var(--border); color: var(--text); }
+  .btn.ghost:hover{ border-color: var(--accent); background: var(--accent-soft); }
+
+  /* ================= STICKY NAV ================= */
+  .topnav{
+    display:flex; gap:4px;
+    margin: 28px 0 32px;
+    background: rgba(18,24,38,0.85);
+    backdrop-filter: blur(10px);
     border:1px solid var(--border);
-    padding:7px 13px;
-    border-radius:8px;
-    color: var(--text);
-    background: var(--surface);
+    padding:6px; border-radius:12px;
+    position: sticky; top:12px; z-index:30;
+    overflow-x:auto;
+    scrollbar-width:none;
   }
-  .hero-tags span:nth-child(odd){ color: var(--lime); }
+  .topnav::-webkit-scrollbar{ display:none; }
+  .topnav a{
+    font-family: var(--font-mono); font-size:0.78rem;
+    padding:9px 15px; border-radius:8px; color: var(--muted);
+    transition: all .2s ease; white-space:nowrap; flex-shrink:0;
+  }
+  .topnav a:hover{ color: var(--text); }
+  .topnav a.active{ background: var(--accent); color:#fff; }
 
-  /* ---------- About ---------- */
-  .about-grid{ display:grid; grid-template-columns: 1.3fr 1fr; gap:40px; align-items:start; }
-  .about-grid p{ color: var(--muted); margin-bottom:14px; }
-  .about-grid p strong{ color: var(--text); }
+  /* ================= LAYOUT ================= */
+  .layout-grid{
+    display:grid;
+    grid-template-columns: 1.9fr 1fr;
+    gap:26px;
+    align-items:start;
+  }
+  .main-col{ display:flex; flex-direction:column; gap:26px; min-width:0; }
+  .side-col{ display:flex; flex-direction:column; gap:20px; }
 
-  .stat-card{
+  @media (min-width: 901px){
+    .side-col{ position:sticky; top:70px; }
+  }
+
+  .card{
     border:1px solid var(--border);
     background: var(--surface);
     border-radius: var(--radius);
-    padding:22px;
+    padding: 28px 30px;
+    scroll-margin-top: 90px;
   }
-  .stat-row{ display:flex; justify-content:space-between; padding:11px 0; border-bottom:1px dashed var(--border); font-size:0.88rem; }
-  .stat-row:last-child{ border-bottom:none; }
-  .stat-row span:first-child{ color: var(--muted); }
-  .stat-row span:last-child{ font-family: var(--font-mono); }
+  .card.mini{ padding:22px 24px; }
 
-  /* ---------- Skills Terminal (signature element) ---------- */
+  .card-head{ display:flex; align-items:center; gap:10px; margin-bottom:20px; }
+  .card-head svg{ color: var(--accent); flex-shrink:0; }
+  .card-head h2{
+    font-family: var(--font-display); font-size:1.3rem; font-weight:700; letter-spacing:-0.01em;
+  }
+  .mini h3{
+    font-family: var(--font-display); font-size:0.98rem; font-weight:600;
+    display:flex; align-items:center; gap:8px; margin-bottom:16px;
+  }
+  .mini h3 svg{ color: var(--accent); }
+
+  /* ---------- About ---------- */
+  .about-card p{ color: var(--muted); margin-bottom:14px; font-size:0.95rem; }
+  .about-card p:last-child{ margin-bottom:0; }
+  .about-card p strong{ color: var(--text); }
+
+  /* ---------- Featured skills pills ---------- */
+  .top-skills{ display:flex; flex-wrap:wrap; gap:10px; margin-bottom:22px; }
+  .top-skills span{
+    display:inline-flex; align-items:center; gap:6px;
+    font-family: var(--font-mono); font-size:0.78rem;
+    border:1px solid var(--border); background: var(--accent-soft);
+    color: var(--text); padding:7px 13px; border-radius:999px;
+  }
+  .top-skills span svg{ width:12px; height:12px; color: var(--lime); }
+
+  /* ---------- Skills Terminal ---------- */
   .terminal{
     background: #0D1220;
     border:1px solid var(--border);
-    border-radius: var(--radius);
+    border-radius: 12px;
     overflow:hidden;
-    box-shadow: 0 20px 60px -20px rgba(0,0,0,0.6);
   }
   .terminal-bar{
-    display:flex; align-items:center; gap:8px;
-    padding:12px 16px;
-    background: var(--surface-2);
-    border-bottom:1px solid var(--border);
+    display:flex; align-items:center; gap:8px; padding:12px 16px;
+    background: var(--surface-2); border-bottom:1px solid var(--border);
   }
   .terminal-dot{ width:11px; height:11px; border-radius:50%; }
   .terminal-bar .terminal-dot:nth-child(1){ background:#FF5F56; }
   .terminal-bar .terminal-dot:nth-child(2){ background:#FFBD2E; }
   .terminal-bar .terminal-dot:nth-child(3){ background:#27C93F; }
-  .terminal-title{
-    margin-left:10px; font-family: var(--font-mono); font-size:0.78rem; color: var(--muted);
-  }
-  .terminal-body{ padding:26px 28px; font-family: var(--font-mono); font-size:0.86rem; }
-  .term-line{ color: var(--muted); margin-bottom:18px; }
+  .terminal-title{ margin-left:10px; font-family: var(--font-mono); font-size:0.78rem; color: var(--muted); }
+  .terminal-body{ padding:24px 26px; font-family: var(--font-mono); font-size:0.86rem; }
+  .term-line{ color: var(--muted); margin-bottom:16px; }
   .term-line .prompt{ color: var(--lime); }
   .term-line .path{ color: var(--accent); }
 
-  .skill-group-label{ color: var(--text); margin: 22px 0 12px; font-size:0.8rem; text-transform:uppercase; letter-spacing:0.08em; }
+  .skill-group-label{ color: var(--text); margin: 20px 0 12px; font-size:0.78rem; text-transform:uppercase; letter-spacing:0.08em; }
   .skill-group-label:first-of-type{ margin-top:0; }
 
-  .skill-row{ display:grid; grid-template-columns: 130px 1fr 52px; align-items:center; gap:14px; margin-bottom:10px; }
+  .skill-row{ display:grid; grid-template-columns: 120px 1fr 46px; align-items:center; gap:12px; margin-bottom:10px; }
   .skill-name{ color: var(--text); }
   .bar-track{ height:8px; background: var(--surface-2); border-radius:6px; overflow:hidden; }
   .bar-fill{ height:100%; border-radius:6px; background: linear-gradient(90deg, var(--accent), var(--lime)); width:0; transition: width 1.1s cubic-bezier(.2,.8,.2,1); }
   .skill-pct{ text-align:right; color: var(--muted); }
 
-  /* ---------- Timeline ---------- */
-  .timeline-cols{ display:grid; grid-template-columns:1fr 1fr; gap:48px; }
-  .timeline-col-title{ display:flex; align-items:center; gap:10px; font-family: var(--font-display); font-size:1.1rem; font-weight:600; margin-bottom:22px; }
-  .timeline-col-title svg{ color: var(--accent); }
+  .skill-tags{ display:flex; flex-wrap:wrap; gap:8px; }
+  .skill-tags span{
+    font-family: var(--font-mono); font-size:0.72rem;
+    border:1px solid var(--border); padding:6px 11px; border-radius:7px;
+    color: var(--muted); background: var(--surface-2);
+  }
 
-  .tl-item{ position:relative; padding-left:24px; padding-bottom:26px; border-left:1px solid var(--border); }
+  /* ---------- Timeline (Experience / Education) ---------- */
+  .tl-item{ position:relative; padding-left:24px; padding-bottom:24px; border-left:1px solid var(--border); }
   .tl-item:last-child{ padding-bottom:0; }
   .tl-item::before{
     content:""; position:absolute; left:-5px; top:4px;
@@ -301,365 +266,492 @@
   .tl-role{ font-weight:600; font-size:0.98rem; }
   .tl-period{ font-family: var(--font-mono); font-size:0.75rem; color: var(--accent); margin:4px 0 8px; }
   .tl-org{ font-size:0.85rem; color: var(--muted); font-style:italic; margin-bottom:6px; }
+  .tl-item p{ font-size:0.85rem; color: var(--muted); }
   .tl-item ul{ margin-top:8px; }
   .tl-item li{ font-size:0.85rem; color: var(--muted); padding-left:14px; position:relative; margin-bottom:6px; }
   .tl-item li::before{ content:"›"; position:absolute; left:0; color: var(--lime); }
 
-  /* ---------- Portfolio gallery ---------- */
-  .gallery-grid{
-    display:grid;
-    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-    gap:22px;
-    margin-bottom:24px;
+  /* ---------- Certifications & publication ---------- */
+  .cert-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(min(230px, 100%), 1fr)); gap:14px; margin-bottom:22px; }
+  .cert-card{
+    display:flex; align-items:center; gap:12px;
+    border:1px solid var(--border); background: var(--surface-2);
+    border-radius:10px; padding:14px 16px; transition: all .2s ease;
   }
-  .folio-thumb{
-    position:relative;
-    border:1px solid var(--border);
-    background: var(--surface);
-    border-radius: var(--radius);
-    overflow:hidden;
+  .cert-card:hover{ border-color: var(--accent); transform: translateY(-2px); }
+  .cert-badge{
+    flex-shrink:0; font-family: var(--font-mono); font-size:0.66rem; font-weight:600;
+    color: var(--accent); border:1px solid var(--border); background: var(--accent-soft);
+    padding:4px 8px; border-radius:6px;
   }
-  .folio-thumb-img-wrap{
-    position:relative;
-    width:100%;
-    aspect-ratio: 4/3;
-    background: linear-gradient(135deg, var(--surface-2), var(--surface));
-    overflow:hidden;
-  }
-  .folio-thumb-img-wrap img{
-    width:100%; height:100%; object-fit:cover; display:block;
-  }
-  .folio-thumb-img-wrap.placeholder{
-    display:flex; align-items:center; justify-content:center;
-    background: linear-gradient(135deg, var(--accent-soft), rgba(201,255,61,0.06));
-  }
-  .folio-thumb-img-wrap.placeholder::before{
-    content: attr(data-index);
-    font-family: var(--font-display);
-    font-size:2.4rem;
-    font-weight:700;
-    color: var(--border);
-  }
-  .folio-thumb-body{ padding:16px 18px; }
-  .folio-thumb-title{ font-family: var(--font-display); font-weight:600; font-size:0.98rem; }
-  .folio-thumb-cat{ font-family: var(--font-mono); font-size:0.72rem; color: var(--accent); margin-top:4px; }
+  .cert-name{ font-size:0.84rem; }
+  .pub-card{ border:1px solid var(--border); background: var(--surface-2); border-radius:12px; padding:22px 24px; }
+  .pub-card h3{ font-family: var(--font-display); font-size:1.05rem; margin-bottom:8px; }
+  .pub-card p{ font-size:0.87rem; color: var(--muted); margin-bottom:14px; }
 
-  /* ---------- Portfolio ---------- */
+  /* ---------- Portfolio / Featured ---------- */
+  .gallery-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr)); gap:clamp(10px, 2vw, 18px); margin-bottom:22px; }
+  .folio-thumb{ border:1px solid var(--border); background: var(--surface-2); border-radius:12px; overflow:hidden; }
+  .folio-thumb-img-wrap{ position:relative; width:100%; aspect-ratio: 4/3; background: linear-gradient(135deg, var(--surface-2), var(--surface)); overflow:hidden; }
+  .folio-thumb-img-wrap img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .folio-thumb-img-wrap.placeholder{ display:flex; align-items:center; justify-content:center; background: linear-gradient(135deg, var(--accent-soft), rgba(201,255,61,0.06)); }
+  .folio-thumb-img-wrap.placeholder::before{ content: attr(data-index); font-family: var(--font-display); font-size:2.2rem; font-weight:700; color: var(--border); }
+  .folio-thumb-body{ padding:14px 16px; }
+  .folio-thumb-title{ font-family: var(--font-display); font-weight:600; font-size:0.92rem; }
+  .folio-thumb-cat{ font-family: var(--font-mono); font-size:0.7rem; color: var(--accent); margin-top:4px; }
+
   .folio-card{
-    display:flex; justify-content:space-between; align-items:center; gap:24px;
-    border:1px solid var(--border); background: var(--surface);
-    border-radius: var(--radius); padding: 30px 34px;
-    flex-wrap:wrap;
+    display:flex; justify-content:space-between; align-items:center; gap:20px;
+    border:1px solid var(--border); background: var(--surface-2);
+    border-radius: 12px; padding: 22px 24px; flex-wrap:wrap;
   }
-  .folio-card h3{ font-family: var(--font-display); font-size:1.3rem; margin-bottom:8px; }
-  .folio-card p{ color: var(--muted); font-size:0.9rem; max-width:420px; }
-  .btn{
-    display:inline-flex; align-items:center; gap:8px;
-    background: var(--accent); color:#fff;
-    padding:12px 20px; border-radius:10px;
-    font-weight:600; font-size:0.9rem;
-    border:none; cursor:pointer;
+  .folio-card + .folio-card{ margin-top:14px; }
+  .folio-card h3{ font-family: var(--font-display); font-size:1.1rem; margin-bottom:6px; }
+  .folio-card p{ color: var(--muted); font-size:0.86rem; max-width:380px; }
+
+  /* ---------- Mini cards: contact / languages / follow ---------- */
+  .mini-row{ display:flex; gap:12px; align-items:flex-start; margin-bottom:16px; }
+  .mini-row:last-child{ margin-bottom:0; }
+  .mini-row svg{ color: var(--accent); flex-shrink:0; margin-top:2px; }
+  .mini-label{ font-size:0.66rem; text-transform:uppercase; letter-spacing:0.07em; color: var(--muted); }
+  .mini-value{ font-size:0.86rem; word-break:break-word; }
+  .mini-value a:hover{ color: var(--lime); }
+
+  .lang-row{ display:flex; justify-content:space-between; font-size:0.86rem; margin-bottom:12px; }
+  .lang-row:last-child{ margin-bottom:0; }
+  .lang-row span:last-child{ color: var(--muted); font-family: var(--font-mono); font-size:0.76rem; }
+
+  .socials-grid{ display:flex; flex-wrap:wrap; gap:10px; }
+  .socials-grid a{
+    width:38px; height:38px; border:1px solid var(--border); border-radius:10px;
+    display:flex; align-items:center; justify-content:center; color: var(--muted);
     transition: all .2s ease;
-    white-space:nowrap;
   }
-  .btn:hover{ background:#6a4cf0; transform: translateY(-2px); }
-  .btn.ghost{ background:transparent; border:1px solid var(--border); color: var(--text); }
-  .btn.ghost:hover{ border-color: var(--accent); }
+  .socials-grid a:hover{ color:#fff; border-color: var(--accent); background: var(--accent-soft); transform: translateY(-2px); }
 
-  /* ---------- Contact ---------- */
-  .contact-grid{ display:grid; grid-template-columns: 1fr 1.4fr; gap:40px; }
-  .contact-card{ border:1px solid var(--border); background: var(--surface); border-radius: var(--radius); padding:26px; }
-  .contact-card .contact-item{ margin-bottom:20px; }
-  .contact-card .contact-item:last-child{ margin-bottom:0; }
-
-  .form-grid{ display:flex; flex-direction:column; gap:16px; }
+  /* ---------- Contact form (full width bottom card) ---------- */
+  .contact-form-grid{ display:flex; flex-direction:column; gap:16px; }
   .form-row{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
   input, textarea{
-    width:100%;
-    background: var(--surface-2);
-    border:1px solid var(--border);
-    border-radius:10px;
-    padding:13px 15px;
-    color: var(--text);
-    font-family: var(--font-body);
-    font-size:0.9rem;
+    width:100%; background: var(--surface-2); border:1px solid var(--border);
+    border-radius:10px; padding:13px 15px; color: var(--text);
+    font-family: var(--font-body); font-size:0.9rem;
   }
   input:focus, textarea:focus{ outline:2px solid var(--accent); outline-offset:1px; }
   textarea{ resize:vertical; min-height:120px; }
   ::placeholder{ color: var(--muted); }
   .form-note{ font-size:0.78rem; color: var(--muted); font-family: var(--font-mono); }
 
-  footer{ text-align:center; padding:36px 20px 50px; color: var(--muted); font-size:0.8rem; font-family: var(--font-mono); border-top:1px solid var(--border); }
+  footer{ text-align:center; padding:36px 20px 10px; color: var(--muted); font-size:0.8rem; font-family: var(--font-mono); }
 
-  /* ---------- Responsive ---------- */
+  /* ================= RESPONSIVE ================= */
+
+  /* Tablets and below: stack the sidebar under the main column */
   @media (max-width: 900px){
-    .app{ grid-template-columns:1fr; }
-    .sidebar{
-      position:fixed; inset:0 auto 0 0; width:280px; height:100vh;
-      background: var(--bg); z-index:40; transform: translateX(-100%);
-      transition: transform .3s ease;
-      overflow-y:auto;
-    }
-    .sidebar.open{ transform: translateX(0); }
-    .mobile-nav-toggle{ display:flex; }
-    .main{ padding: 90px 20px 60px; }
-    .about-grid, .timeline-cols, .contact-grid{ grid-template-columns: 1fr; }
+    .layout-grid{ grid-template-columns: 1fr; gap:20px; }
+  }
+
+  /* Small tablets / large phones: tighten spacing a touch */
+  @media (max-width: 700px){
+    .card{ padding: clamp(18px, 4vw, 28px) clamp(16px, 4vw, 30px); }
+    .terminal-body{ padding: 20px; }
+    .layout-grid{ gap:16px; }
+  }
+
+  /* Phones: switch stacked layouts, full-width buttons and inputs */
+  @media (max-width: 560px){
+    .identity-actions{ flex-direction:column; }
+    .identity-actions .btn{ width:100%; justify-content:center; }
     .form-row{ grid-template-columns:1fr; }
+    .skill-row{ grid-template-columns: 92px 1fr 40px; gap:8px; }
     .folio-card{ flex-direction:column; align-items:flex-start; }
+    .folio-card .btn{ width:100%; justify-content:center; }
+    .identity-meta{ gap:6px; }
+    .top-skills{ gap:8px; }
+  }
+
+  /* Small phones: extra compact typography and controls */
+  @media (max-width: 380px){
+    .identity-name{ font-size:1.35rem; }
+    .card-head h2{ font-size:1.1rem; }
+    .skill-row{ grid-template-columns: 78px 1fr 36px; }
+    .skill-name{ font-size:0.78rem; }
+    .terminal-body{ padding:16px; font-size:0.78rem; }
+    .cert-name{ font-size:0.8rem; }
+    .btn{ font-size:0.82rem; padding:10px 16px; }
+  }
+
+  /* Landscape phones: keep the banner from eating the viewport */
+  @media (max-height: 480px) and (orientation: landscape){
+    .banner{ height:110px; }
+  }
+
+  /* Larger desktops: a little extra breathing room */
+  @media (min-width: 1400px){
+    .page{ max-width: 1180px; }
   }
 </style>
 </head>
 <body>
 
-<button class="mobile-nav-toggle" id="navToggle" aria-label="Toggle menu">
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-</button>
+<div class="page">
 
-<div class="app">
+  <!-- ================= BANNER + IDENTITY ================= -->
+  <header class="banner">
+    <!-- COVER PHOTO — edit the src below directly to set your own cover image
+         (e.g. assets/images/cover.jpg). If the file is missing, the gradient
+         banner shows instead automatically. -->
+    <img class="banner-img" id="coverImg" src="assets/images/cover.jpg" alt="Cover photo" onerror="this.style.display='none'">
+  </header>
 
-  <!-- ================= SIDEBAR ================= -->
-  <aside class="sidebar" id="sidebar">
-    <div>
-      <div class="avatar" id="avatarBox">
-        <!-- PROFILE IMAGE — edit the src below directly to set your photo
-             (e.g. assets/images/profile.jpg). Falls back to initials if missing. -->
-        <img id="avatarImg" src="img/Profile image 02.jpeg" alt="Mahmud Hasan Mahedi" onerror="handleImgError(this)">
-        <span class="avatar-fallback">MH</span>
-      </div>
-      <div class="id-name">Mahmud Hasan Mahedi</div>
-      <div class="id-role">whoami --title</div>
-      <div class="status-pill"><span class="status-dot"></span> Available for freelance</div>
+  <div class="identity">
+    <div class="avatar-ring" id="avatarBox">
+      <!-- PROFILE IMAGE — edit the src below directly to set your photo
+           (e.g. assets/images/profile.jpg). Falls back to initials if missing. -->
+      <img id="avatarImg" src="assets/images/profile.jpg" alt="Mahmud Hasan Mahedi" onerror="handleImgError(this)">
+      <span class="avatar-fallback">MH</span>
     </div>
 
-    <div class="contact-list">
-      <div class="contact-item">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
-        <div><div class="contact-label">Email</div><div class="contact-value"><a href="mailto:mahmudhasanmahedi07@gmail.com">mahmudhasanmahedi07@gmail.com</a></div></div>
-      </div>
-      <div class="contact-item">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        <div><div class="contact-label">Phone</div><div class="contact-value"><a href="tel:+8801993207556">+880 1993 207556</a></div></div>
-      </div>
-      <div class="contact-item">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        <div><div class="contact-label">Birthday</div><div class="contact-value">24 August, 2000</div></div>
-      </div>
-      <div class="contact-item">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        <div><div class="contact-label">Location</div><div class="contact-value">Gazipur, Dhaka, Bangladesh</div></div>
-      </div>
-    </div>
-
-    <div class="sidebar-spacer"></div>
-
-    <div class="socials">
-      <a href="https://www.linkedin.com/in/mahmud-hasan-2b61a5274/" target="_blank" rel="noopener" aria-label="LinkedIn">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.38-1.85 3.62 0 4.29 2.38 4.29 5.48v6.26zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
-      </a>
-      <a href="https://dribbble.com/mhm007" target="_blank" rel="noopener" aria-label="Dribbble">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M8 3.5c2.3 3 3.9 6.8 4.5 11.5M3 15.5c3.5-1.5 8-2 13-.7M14.5 3c1.2 4.5.7 9.3-2 13.2"/></svg>
-      </a>
-    </div>
-  </aside>
-
-  <!-- ================= MAIN ================= -->
-  <main class="main">
-
-    <nav class="topnav">
-      <a href="#hero" class="active" data-nav>Home</a>
-      <a href="#about" data-nav>About</a>
-      <a href="#skills" data-nav>Skills</a>
-      <a href="#resume" data-nav>Resume</a>
-      <a href="#portfolio" data-nav>Portfolio</a>
-      <a href="#contact" data-nav>Contact</a>
-    </nav>
-
-    <!-- HERO -->
-    <section id="hero" class="hero">
-      <div class="eyebrow">Creative Designer / Web Developer</div>
-      <h1>Building <span class="grad">interfaces</span> and identities that feel considered, not templated.</h1>
-      <p class="lede">I'm Mahedi — a designer and developer from Gazipur, Bangladesh, currently leading design work at Wedel Technologies while taking on freelance projects on the side.</p>
-      <div class="hero-tags">
-        <span>Designer</span>
-        <span>Web Developer</span>
-        <span>Freelancer</span>
-        <span>Photographer</span>
-      </div>
-    </section>
-
-    <!-- ABOUT -->
-    <section id="about">
-      <div class="eyebrow">01 · About</div>
-      <h2 class="section-title">Who I am</h2>
-      <div class="about-grid">
-        <div>
-          <p>As a creative person, my objective is to use my skills to generate new, useful ideas and <strong>collaborate effectively</strong> with others to bring creative visions to life — from a Figma file to a shipped, functioning site.</p>
-          <p>I'm currently pursuing my <strong>B.Sc in Computer Science &amp; Engineering</strong> at Uttara University, and I split my time between UI/UX design, front-end development, and freelance client work.</p>
-          <p>My aim on every project is the same: bring across the client's message and identity in the most creative way possible, without losing sight of usability.</p>
-        </div>
-        <div class="stat-card">
-          <div class="stat-row"><span>Degree</span><span>B.Sc in CSE</span></div>
-          <div class="stat-row"><span>University</span><span>Uttara University</span></div>
-          <div class="stat-row"><span>Website</span><span><a href="https://bio.link/mhm0199" target="_blank" rel="noopener">bio.link/mhm0199</a></span></div>
-          <div class="stat-row"><span>Freelance</span><span style="color:var(--lime)">Available</span></div>
-          <div class="stat-row"><span>City</span><span>Dhaka, BD</span></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SKILLS -->
-    <section id="skills">
-      <div class="eyebrow">02 · Skills</div>
-      <h2 class="section-title">What I work with</h2>
-
-      <div class="terminal">
-        <div class="terminal-bar">
-          <span class="terminal-dot"></span><span class="terminal-dot"></span><span class="terminal-dot"></span>
-          <span class="terminal-title">mahedi@portfolio — skills.sh</span>
-        </div>
-        <div class="terminal-body">
-          <div class="term-line"><span class="prompt">$</span> cat <span class="path">./skills/coding.json</span></div>
-
-          <div class="skill-group-label">Coding skills</div>
-          <div class="skill-row"><span class="skill-name">JavaScript</span><div class="bar-track"><div class="bar-fill" data-pct="86"></div></div><span class="skill-pct">86%</span></div>
-          <div class="skill-row"><span class="skill-name">Python</span><div class="bar-track"><div class="bar-fill" data-pct="90"></div></div><span class="skill-pct">90%</span></div>
-          <div class="skill-row"><span class="skill-name">PHP</span><div class="bar-track"><div class="bar-fill" data-pct="80"></div></div><span class="skill-pct">80%</span></div>
-          <div class="skill-row"><span class="skill-name">HTML / CSS</span><div class="bar-track"><div class="bar-fill" data-pct="100"></div></div><span class="skill-pct">100%</span></div>
-
-          <div class="term-line" style="margin-top:24px;"><span class="prompt">$</span> cat <span class="path">./skills/design.json</span></div>
-
-          <div class="skill-group-label">Design skills</div>
-          <div class="skill-row"><span class="skill-name">UI / UX</span><div class="bar-track"><div class="bar-fill" data-pct="92"></div></div><span class="skill-pct">92%</span></div>
-          <div class="skill-row"><span class="skill-name">Web Design</span><div class="bar-track"><div class="bar-fill" data-pct="99"></div></div><span class="skill-pct">99%</span></div>
-          <div class="skill-row"><span class="skill-name">Logo Design</span><div class="bar-track"><div class="bar-fill" data-pct="79"></div></div><span class="skill-pct">79%</span></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- RESUME -->
-    <section id="resume">
-      <div class="eyebrow">03 · Resume</div>
-      <h2 class="section-title">Education &amp; Experience</h2>
-      <div class="timeline-cols">
-        <div>
-          <div class="timeline-col-title">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/></svg>
-            Education
-          </div>
-          <div class="tl-item">
-            <div class="tl-role">B.Sc in Computer Science &amp; Engineering</div>
-            <div class="tl-period">2019 — 2023</div>
-            <div class="tl-org">Uttara University, Gazipur</div>
-            <p style="font-size:0.85rem; color:var(--muted);">Studied Computer Science &amp; Engineering, building the technical foundation behind my design and development work.</p>
-          </div>
-        </div>
-        <div>
-          <div class="timeline-col-title">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-            Experience
-          </div>
-          <div class="tl-item">
-            <div class="tl-role">Design Lead</div>
-            <div class="tl-period">2023 — Present</div>
-            <div class="tl-org">Wedel Technologies · Dhaka, Gazipur, BD</div>
-            <ul>
-              <li>Lead the design, development, and implementation of graphic, layout, and production communication materials</li>
-              <li>Delegate tasks across a 7-person design team and advise on all aspects of each project</li>
-              <li>Oversee quality and accuracy review of all graphic materials</li>
-              <li>Manage production budgets ranging from $2,000 – $25,000</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- PORTFOLIO -->
-    <section id="portfolio">
-      <div class="eyebrow">04 · Portfolio</div>
-      <h2 class="section-title">See the work</h2>
-
-      <div class="gallery-grid" id="galleryGrid">
-        <!-- ============================================================
-             PORTFOLIO IMAGES — edit directly in this code.
-             For each card below, just change the img "src" to your own
-             file (e.g. assets/images/project-1.jpg), and update the
-             title / category text. If a src is missing or the file
-             isn't found, a numbered placeholder shows automatically. -->
-
-        <div class="folio-thumb">
-          <div class="folio-thumb-img-wrap" data-index="01">
-            <img src="assets/images/project-1.jpg" alt="Project 1" onerror="handleThumbError(this)">
-          </div>
-          <div class="folio-thumb-body">
-            <div class="folio-thumb-title">Project 01</div>
-            <div class="folio-thumb-cat">Web design</div>
-          </div>
-        </div>
-
-        <div class="folio-thumb">
-          <div class="folio-thumb-img-wrap" data-index="02">
-            <img src="assets/images/project-2.jpg" alt="Project 2" onerror="handleThumbError(this)">
-          </div>
-          <div class="folio-thumb-body">
-            <div class="folio-thumb-title">Project 02</div>
-            <div class="folio-thumb-cat">Web development</div>
-          </div>
-        </div>
-
-        <div class="folio-thumb">
-          <div class="folio-thumb-img-wrap" data-index="03">
-            <img src="assets/images/project-3.jpg" alt="Project 3" onerror="handleThumbError(this)">
-          </div>
-          <div class="folio-thumb-body">
-            <div class="folio-thumb-title">Project 03</div>
-            <div class="folio-thumb-cat">Logo design</div>
-          </div>
-        </div>
-
-        <div class="folio-thumb">
-          <div class="folio-thumb-img-wrap" data-index="04">
-            <img src="assets/images/project-4.jpg" alt="Project 4" onerror="handleThumbError(this)">
-          </div>
-          <div class="folio-thumb-body">
-            <div class="folio-thumb-title">Project 04</div>
-            <div class="folio-thumb-cat">UI / UX</div>
-          </div>
-        </div>
+    <div class="identity-body">
+      <div class="identity-name-row">
+        <div class="identity-name">Mahmud Hasan Mahedi</div>
+        <span class="status-pill"><span class="status-dot"></span> Open to freelance work</span>
       </div>
 
-      <div class="folio-card">
-        <div>
-          <h3>Behance</h3>
-          <p>Millions of designers and agencies around the world showcase their portfolio work on Dribbble — mine included.</p>
-        </div>
-        <a href="https://www.behance.net/mahmudhasan69" target="_blank" rel="noopener" class="btn">
-          View on Behance
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+      <p class="identity-headline">
+        <span class="grad">Blending design &amp; tech</span> to create impact — Graphic Designer at HumbleIT.
+      </p>
+
+      <div class="identity-meta">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span>Gazipur, Dhaka, Bangladesh</span>
+        <span class="dot-sep"></span>
+        <a href="https://bio.link/mhm0199" target="_blank" rel="noopener">bio.link/mhm0199</a>
+        <span class="dot-sep"></span>
+        <a href="https://www.linkedin.com/in/mahmud-hasan-42929136b/" target="_blank" rel="noopener">LinkedIn Profile</a>
+      </div>
+
+      <div class="identity-actions">
+        <a href="mailto:mahmudhasanmahedi07@gmail.com" class="btn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+          Contact Me
         </a>
+        <a href="#portfolio" class="btn ghost">View Portfolio</a>
+        <a href="#certifications" class="btn ghost">Certifications</a>
       </div>
-    </section>
+    </div>
+  </div>
 
-    <!-- CONTACT -->
-    <section id="contact">
-      <div class="eyebrow">05 · Contact</div>
-      <h2 class="section-title">Let's work together</h2>
-      <div class="contact-grid">
-        <div class="contact-card">
-          <div class="contact-item">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            <div><div class="contact-label">Location</div><div class="contact-value">Gazipur, Uttara, Dhaka</div></div>
+  <!-- ================= STICKY NAV ================= -->
+  <nav class="topnav">
+    <a href="#about" class="active" data-nav>About</a>
+    <a href="#skills" data-nav>Skills</a>
+    <a href="#experience" data-nav>Experience</a>
+    <a href="#education" data-nav>Education</a>
+    <a href="#certifications" data-nav>Certifications</a>
+    <a href="#portfolio" data-nav>Portfolio</a>
+    <a href="#contact" data-nav>Contact</a>
+  </nav>
+
+  <!-- ================= LAYOUT ================= -->
+  <div class="layout-grid">
+
+    <!-- ===== MAIN COLUMN ===== -->
+    <main class="main-col">
+
+      <!-- ABOUT -->
+      <section id="about" class="card about-card">
+        <div class="card-head">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0 1 16 0v1"/></svg>
+          <h2>About</h2>
+        </div>
+        <p>As a creative person, my objective is to use my skills to generate new, useful ideas and <strong>collaborate effectively</strong> with others to bring creative visions to life — from a Figma file to a shipped, functioning site.</p>
+        <p>I hold a <strong>B.Sc in Computer Science &amp; Engineering</strong> from Uttara University (2019–2023), and my work sits at the intersection of graphic design, front-end development, and IT operations.</p>
+        <p>My aim on every project is the same: bring across the client's message and identity in the most creative way possible, without losing sight of usability.</p>
+      </section>
+
+      <!-- SKILLS -->
+      <section id="skills" class="card">
+        <div class="card-head">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+          <h2>Skills</h2>
+        </div>
+
+        <div class="top-skills">
+          <span><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9 12 2"/></svg> HTML / CSS</span>
+          <span><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9 12 2"/></svg> Web Design</span>
+          <span><svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9 12 2"/></svg> UI / UX Design</span>
+        </div>
+
+        <div class="terminal">
+          <div class="terminal-bar">
+            <span class="terminal-dot"></span><span class="terminal-dot"></span><span class="terminal-dot"></span>
+            <span class="terminal-title">mahedi@portfolio — skills.sh</span>
           </div>
-          <div class="contact-item">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
-            <div><div class="contact-label">Email</div><div class="contact-value"><a href="mailto:mahmudhasanmahedi07@gmail.com">mahmudhasanmahedi07@gmail.com</a></div></div>
+          <div class="terminal-body">
+            <div class="term-line"><span class="prompt">$</span> cat <span class="path">./skills/coding.json</span></div>
+
+            <div class="skill-group-label">Coding skills</div>
+            <div class="skill-row"><span class="skill-name">JavaScript</span><div class="bar-track"><div class="bar-fill" data-pct="86"></div></div><span class="skill-pct">86%</span></div>
+            <div class="skill-row"><span class="skill-name">Python</span><div class="bar-track"><div class="bar-fill" data-pct="90"></div></div><span class="skill-pct">90%</span></div>
+            <div class="skill-row"><span class="skill-name">PHP</span><div class="bar-track"><div class="bar-fill" data-pct="80"></div></div><span class="skill-pct">80%</span></div>
+            <div class="skill-row"><span class="skill-name">HTML / CSS</span><div class="bar-track"><div class="bar-fill" data-pct="100"></div></div><span class="skill-pct">100%</span></div>
+
+            <div class="term-line" style="margin-top:22px;"><span class="prompt">$</span> cat <span class="path">./skills/design.json</span></div>
+
+            <div class="skill-group-label">Design skills</div>
+            <div class="skill-row"><span class="skill-name">UI / UX</span><div class="bar-track"><div class="bar-fill" data-pct="92"></div></div><span class="skill-pct">92%</span></div>
+            <div class="skill-row"><span class="skill-name">Web Design</span><div class="bar-track"><div class="bar-fill" data-pct="99"></div></div><span class="skill-pct">99%</span></div>
+            <div class="skill-row"><span class="skill-name">Logo Design</span><div class="bar-track"><div class="bar-fill" data-pct="79"></div></div><span class="skill-pct">79%</span></div>
+
+            <div class="term-line" style="margin-top:22px;"><span class="prompt">$</span> cat <span class="path">./skills/other.txt</span></div>
+            <div class="skill-group-label">Also skilled in</div>
+            <div class="skill-tags">
+              <span>IT Infrastructure</span>
+              <span>Networking</span>
+              <span>IT Operations</span>
+              <span>Project Management</span>
+              <span>Team Management</span>
+              <span>Communication</span>
+              <span>Content Creation</span>
+              <span>Brand Design</span>
+              <span>Corporate Design</span>
+              <span>Visual Studio</span>
+            </div>
           </div>
-          <div class="contact-item">
-            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            <div><div class="contact-label">Call</div><div class="contact-value"><a href="tel:+8801993207556">+880 1993 207556</a></div></div>
+        </div>
+      </section>
+
+      <!-- EXPERIENCE -->
+      <section id="experience" class="card">
+        <div class="card-head">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          <h2>Experience</h2>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-role">Graphic Designer</div>
+          <div class="tl-period">Dec 2025 — Present · Onsite</div>
+          <div class="tl-org">HumbleIT</div>
+          <ul>
+            <li>Conceptualize, design, and deliver visually impactful work aligned with the company's brand identity</li>
+            <li>Bring creative direction to ongoing design projects across the team</li>
+          </ul>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-role">IT Trainee Officer</div>
+          <div class="tl-period">Jul 2024 — Oct 2025 · Hybrid</div>
+          <div class="tl-org">aamra Pro Solutions</div>
+          <ul>
+            <li>Assisted with onsite IT support for clients, including desktop setup and troubleshooting</li>
+            <li>Monitored network connectivity (LAN/WAN/Wi-Fi) and maintained IT inventory</li>
+            <li>Followed cybersecurity protocols and prepared regular support reports</li>
+          </ul>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-role">Graphic Designer Internship</div>
+          <div class="tl-period">Oct 2023 — Jan 2024 · Remote</div>
+          <div class="tl-org">Project C Foundation — mental health advocacy</div>
+          <ul>
+            <li>Designed visual content supporting a mental health awareness initiative</li>
+          </ul>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-role">Creative Designer</div>
+          <div class="tl-period">Jan 2023 — Dec 2023 · Remote</div>
+          <div class="tl-org">WeDel Technologies</div>
+          <ul>
+            <li>Conceptualized and delivered design work aligned with the company's brand identity and goals</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- EDUCATION -->
+      <section id="education" class="card">
+        <div class="card-head">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/></svg>
+          <h2>Education</h2>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-role">B.Sc in Computer Science &amp; Engineering</div>
+          <div class="tl-period">2019 — 2023</div>
+          <div class="tl-org">Uttara University, Gazipur</div>
+          <p>Studied Computer Science &amp; Engineering, building the technical foundation behind my design and development work.</p>
+        </div>
+
+        <div class="tl-item">
+          <div class="tl-role">Assistant Class Representative</div>
+          <div class="tl-period">Jan 2019 — Dec 2023</div>
+          <div class="tl-org">Uttara University</div>
+          <p>Supported coordination between students and faculty, helping improve the day-to-day learning environment.</p>
+        </div>
+      </section>
+
+      <!-- CERTIFICATIONS -->
+      <section id="certifications" class="card">
+        <div class="card-head">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M8.5 13.5L7 22l5-3 5 3-1.5-8.5"/></svg>
+          <h2>Licenses &amp; Certifications</h2>
+        </div>
+
+        <div class="cert-grid">
+          <a class="cert-card" href="https://www.cloudskillsboost.google/public_profiles/cc6fde13-eaab-412e-8756-aaacbaa3222f/badges/8310009" target="_blank" rel="noopener">
+            <span class="cert-badge">Google</span>
+            <span class="cert-name">Introduction to Large Language Models</span>
+          </a>
+          <a class="cert-card" href="https://www.cloudskillsboost.google/public_profiles/cc6fde13-eaab-412e-8756-aaacbaa3222f/badges/8309687" target="_blank" rel="noopener">
+            <span class="cert-badge">Google</span>
+            <span class="cert-name">Introduction to Generative AI</span>
+          </a>
+          <a class="cert-card" href="https://www.cloudskillsboost.google/public_profiles/cc6fde13-eaab-412e-8756-aaacbaa3222f/badges/8406678" target="_blank" rel="noopener">
+            <span class="cert-badge">Google</span>
+            <span class="cert-name">Introduction to Responsible AI</span>
+          </a>
+          <a class="cert-card" href="https://10minuteschool.com/certificate/6601a111b9e81" target="_blank" rel="noopener">
+            <span class="cert-badge">10MS</span>
+            <span class="cert-name">Graphic Design Fundamentals</span>
+          </a>
+          <a class="cert-card" href="https://10minuteschool.com/certificate/6602d8a648f7d" target="_blank" rel="noopener">
+            <span class="cert-badge">10MS</span>
+            <span class="cert-name">Microsoft Office Starter Course</span>
+          </a>
+          <a class="cert-card" href="https://10minuteschool.com/certificate/63e7d7a23e883" target="_blank" rel="noopener">
+            <span class="cert-badge">10MS</span>
+            <span class="cert-name">IELTS Mock Test Solutions</span>
+          </a>
+        </div>
+
+        <div class="pub-card">
+          <div class="skill-group-label" style="margin-top:0;">Publication</div>
+          <h3>Development and Analysis of a Multifunctional AI Voice Assistant with Face Recognition</h3>
+          <p>Published 2023, Uttara University. Combines voice-based natural language processing with facial recognition to improve accessibility, personalization, and security beyond typical voice-only assistants.</p>
+          <a href="https://www.researchgate.net/publication/379599191_Development_and_Analysis_of_a_Multifunctional_AI_Voice_Assistant_with_Face_Recognition" target="_blank" rel="noopener" class="btn ghost">
+            Read on ResearchGate
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+          </a>
+        </div>
+      </section>
+
+      <!-- PORTFOLIO -->
+      <section id="portfolio" class="card">
+        <div class="card-head">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          <h2>Featured Work</h2>
+        </div>
+
+        <div class="gallery-grid" id="galleryGrid">
+          <!-- ============================================================
+               PORTFOLIO IMAGES — edit directly in this code.
+               Change the img "src" to your own file (e.g. assets/images/project-1.jpg)
+               and update the title / category text. Missing files fall back
+               to a numbered placeholder automatically. -->
+
+          <div class="folio-thumb">
+            <div class="folio-thumb-img-wrap" data-index="01">
+              <img src="assets/images/project-1.jpg" alt="MHM Portfolio Site" onerror="handleThumbError(this)">
+            </div>
+            <div class="folio-thumb-body">
+              <div class="folio-thumb-title">MHM Portfolio Site</div>
+              <div class="folio-thumb-cat">HTML · CSS · JS · Bootstrap</div>
+            </div>
+          </div>
+
+          <div class="folio-thumb">
+            <div class="folio-thumb-img-wrap" data-index="02">
+              <img src="assets/images/project-2.jpg" alt="AI Voice Assistant with Face Recognition" onerror="handleThumbError(this)">
+            </div>
+            <div class="folio-thumb-body">
+              <div class="folio-thumb-title">AI Voice Assistant w/ Face Recognition</div>
+              <div class="folio-thumb-cat">Research · AI</div>
+            </div>
+          </div>
+
+          <div class="folio-thumb">
+            <div class="folio-thumb-img-wrap" data-index="03">
+              <img src="assets/images/project-3.jpg" alt="Computer Control with Hand Gesture" onerror="handleThumbError(this)">
+            </div>
+            <div class="folio-thumb-body">
+              <div class="folio-thumb-title">Computer Control w/ Hand Gesture</div>
+              <div class="folio-thumb-cat">Python · OpenCV · Mediapipe</div>
+            </div>
+          </div>
+
+          <div class="folio-thumb">
+            <div class="folio-thumb-img-wrap" data-index="04">
+              <img src="assets/images/project-4.jpg" alt="QR Code Generator" onerror="handleThumbError(this)">
+            </div>
+            <div class="folio-thumb-body">
+              <div class="folio-thumb-title">QR Code Generator</div>
+              <div class="folio-thumb-cat">Python · Tkinter</div>
+            </div>
+          </div>
+
+          <div class="folio-thumb">
+            <div class="folio-thumb-img-wrap" data-index="05">
+              <img src="assets/images/project-5.jpg" alt="To-Do List Web App" onerror="handleThumbError(this)">
+            </div>
+            <div class="folio-thumb-body">
+              <div class="folio-thumb-title">To-Do List Web App</div>
+              <div class="folio-thumb-cat">Web development</div>
+            </div>
+          </div>
+
+          <div class="folio-thumb">
+            <div class="folio-thumb-img-wrap" data-index="06">
+              <img src="assets/images/project-6.jpg" alt="Tic-Tac-Toe Web Game" onerror="handleThumbError(this)">
+            </div>
+            <div class="folio-thumb-body">
+              <div class="folio-thumb-title">Tic-Tac-Toe Web Game</div>
+              <div class="folio-thumb-cat">HTML · CSS · JS</div>
+            </div>
+          </div>
+
+          <div class="folio-thumb">
+            <div class="folio-thumb-img-wrap" data-index="07">
+              <img src="assets/images/project-7.jpg" alt="Frontend Login Form Design" onerror="handleThumbError(this)">
+            </div>
+            <div class="folio-thumb-body">
+              <div class="folio-thumb-title">Login Form Design</div>
+              <div class="folio-thumb-cat">UI / UX</div>
+            </div>
           </div>
         </div>
 
-        <form class="form-grid" id="contactForm">
+        <div class="folio-card">
+          <div>
+            <h3>Dribbble</h3>
+            <p>Millions of designers and agencies around the world showcase their portfolio work on Dribbble — mine included.</p>
+          </div>
+          <a href="https://dribbble.com/mhm007" target="_blank" rel="noopener" class="btn">
+            View on Dribbble
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+          </a>
+        </div>
+
+        <div class="folio-card">
+          <div>
+            <h3>Behance</h3>
+            <p>More case studies and full project breakdowns are also up on my Behance profile.</p>
+          </div>
+          <a href="https://www.behance.net/mahmudhasan69" target="_blank" rel="noopener" class="btn ghost">
+            View on Behance
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+          </a>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact" class="card">
+        <div class="card-head">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <h2>Let's Work Together</h2>
+        </div>
+
+        <form class="contact-form-grid" id="contactForm">
           <div class="form-row">
             <input type="text" name="name" placeholder="Your name" required>
             <input type="email" name="email" placeholder="Your email" required>
@@ -671,13 +763,84 @@
             <button type="submit" class="btn">Send message</button>
           </div>
         </form>
+      </section>
+
+    </main>
+
+    <!-- ===== SIDE COLUMN ===== -->
+    <aside class="side-col">
+
+      <div class="card mini">
+        <h3>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+          Contact info
+        </h3>
+        <div class="mini-row">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+          <div><div class="mini-label">Email</div><div class="mini-value"><a href="mailto:mahmudhasanmahedi07@gmail.com">mahmudhasanmahedi07@gmail.com</a></div></div>
+        </div>
+        <div class="mini-row">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <div><div class="mini-label">Phone</div><div class="mini-value"><a href="tel:+8801993207556">+880 1993 207556</a></div></div>
+        </div>
+        <div class="mini-row">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <div><div class="mini-label">Birthday</div><div class="mini-value">24 August, 2000</div></div>
+        </div>
+        <div class="mini-row">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <div><div class="mini-label">Location</div><div class="mini-value">Gazipur, Dhaka, Bangladesh</div></div>
+        </div>
       </div>
-    </section>
 
-  </main>
+      <div class="card mini">
+        <h3>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z"/></svg>
+          Languages
+        </h3>
+        <div class="lang-row"><span>Bangla</span><span>Native</span></div>
+        <div class="lang-row"><span>English</span><span>Professional</span></div>
+        <div class="lang-row"><span>Hindi</span><span>Conversational</span></div>
+      </div>
+
+      <div class="card mini">
+        <h3>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="10.6" x2="15.4" y2="6.4"/><line x1="8.6" y1="13.4" x2="15.4" y2="17.6"/></svg>
+          Follow
+        </h3>
+        <div class="socials-grid">
+          <a href="https://www.linkedin.com/in/mahmud-hasan-42929136b/" target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.38-1.85 3.62 0 4.29 2.38 4.29 5.48v6.26zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+          </a>
+          <a href="http://github.com/mahedi4225" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </a>
+          <a href="https://dribbble.com/mhm007" target="_blank" rel="noopener" aria-label="Dribbble" title="Dribbble">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="10"/><path d="M8 3.5c2.3 3 3.9 6.8 4.5 11.5M3 15.5c3.5-1.5 8-2 13-.7M14.5 3c1.2 4.5.7 9.3-2 13.2"/></svg>
+          </a>
+          <a href="https://www.behance.net/mahmudhasan69" target="_blank" rel="noopener" aria-label="Behance" title="Behance">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="7" width="18" height="12" rx="2"/><path d="M3 10h18"/></svg>
+          </a>
+          <a href="https://medium.com/@mhm0199320" target="_blank" rel="noopener" aria-label="Medium" title="Medium">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h11l5 16H9L4 4z"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="13" x2="16" y2="13"/></svg>
+          </a>
+          <a href="http://www.youtube.com/@iammhm/featured" target="_blank" rel="noopener" aria-label="YouTube" title="YouTube">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="6" width="19" height="12" rx="3"/><polygon points="10.5 9.5 15 12 10.5 14.5" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="https://www.fiverr.com/mahedi0199" target="_blank" rel="noopener" aria-label="Fiverr" title="Fiverr">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17V9a4 4 0 0 1 4-4h2"/><line x1="5" y1="9" x2="13" y2="9"/><line x1="5" y1="17" x2="9" y2="17"/><line x1="17" y1="9" x2="17" y2="17"/><line x1="15" y1="13" x2="19" y2="13"/></svg>
+          </a>
+          <a href="https://www.freelancer.com.bd/u/MHMahedi" target="_blank" rel="noopener" aria-label="Freelancer" title="Freelancer">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2v6a2 2 0 0 0 2 2h6"/><path d="M18 22H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8l6 6v12a2 2 0 0 1-2 2z"/></svg>
+          </a>
+        </div>
+      </div>
+
+    </aside>
+  </div>
+
+  <footer>© 2026 Mahmud Hasan Mahedi — designed &amp; built with care.</footer>
 </div>
-
-<footer>© 2026 Mahmud Hasan Mahedi — designed &amp; built with care.</footer>
 
 <script>
   // ---- image fallback handling ----
@@ -692,22 +855,12 @@
     img.remove();
   }
 
-  // mobile nav toggle
-  const navToggle = document.getElementById('navToggle');
-  const sidebar = document.getElementById('sidebar');
-  navToggle.addEventListener('click', () => sidebar.classList.toggle('open'));
-
-  // close sidebar on link click (mobile)
-  document.querySelectorAll('.sidebar a, .topnav a').forEach(link => {
-    link.addEventListener('click', () => sidebar.classList.remove('open'));
-  });
-
-  // active nav link on scroll
+  // ---- active nav link on scroll ----
   const sections = document.querySelectorAll('main section[id]');
   const navLinks = document.querySelectorAll('.topnav a');
   const setActive = () => {
     let current = sections[0].id;
-    const offset = 140;
+    const offset = 130;
     sections.forEach(sec => {
       if (window.scrollY >= sec.offsetTop - offset) current = sec.id;
     });
@@ -718,7 +871,7 @@
   window.addEventListener('scroll', setActive);
   setActive();
 
-  // animate skill bars when visible
+  // ---- animate skill bars when visible ----
   const bars = document.querySelectorAll('.bar-fill');
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => {
@@ -730,7 +883,7 @@
   }, { threshold: 0.3 });
   bars.forEach(b => io.observe(b));
 
-  // contact form -> mailto
+  // ---- contact form -> mailto ----
   const form = document.getElementById('contactForm');
   const status = document.getElementById('formStatus');
   form.addEventListener('submit', function(e){
